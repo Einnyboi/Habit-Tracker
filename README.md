@@ -1,7 +1,14 @@
 # Habit-Tracker
 
+## Anggota
+Cathrine Sandrina 535240075
+Vanesa Yolanda 535240071
+Jessica Perez Chen 535240188
+
+## Deskripsi
 Simple Habit Tracker adalah aplikasi web sederhana yang memungkinkan pengguna untuk mencatat dan melacak kebiasaan mereka. Pengguna dapat menambahkan kebiasaan baru, menandai kebiasaan yang telah dilakukan sebagai selesai, serta menghapus kebiasaan yang tidak diinginkan. Habits akan reset di bulan baru, dan habits bersifat daily, yaitu selesai sekali sehari.
-Aplikasi web ini menggunakan HTML, CSS dan Javascript.
+
+Aplikasi web ini menggunakan HTML, CSS dan Javascript. Data habits disimpan secara lokal di dalam file json. User dapat melihat berapa kali per bulan mereka telah melakukan habits dan total keseluruhannya.
 
 ## Fitur
 - Membuat Habits baru.
@@ -23,7 +30,7 @@ Aplikasi web ini menggunakan HTML, CSS dan Javascript.
    json-server --watch db.json --port 3000
    ```
 
-6. Buka file `index.html` di browser
+5. Buka file `index.html` di browser
    a. Bisa dengan langsung klik dua kali file `index.html`
    b. Atau gunakan extension Live Server di VS Code :
       -Klik kanan file `index.html`
@@ -34,7 +41,7 @@ Aplikasi web ini menggunakan HTML, CSS dan Javascript.
 1. Klik kolom kosong di bawah tulisan "Create a New Habit".
 2. Ketikkan Kebiasaan/Habit harian yang ingin dilakukan user.
 3. Klik "Add Habit" untuk menambahkannya ke list Habits.
-4. Habits akan muncul di dalam list, klik "Mark Done" untuk menandai status Habit hari ini sudah dilakukan.
+4. Habits akan muncul di dalam list, klik "Mark Done" untuk menandai status Habit hari ini jika sudah dilakukan.
 5. Klik "Delete" untuk menghapus kebiasaan dari daftar.
 
 ## Notes
@@ -64,5 +71,6 @@ Aplikasi web ini menggunakan HTML, CSS dan Javascript.
 - Menambahkan kategori daily, weekly or monthly untuk user.
 - Memperindah UI agar lebih mudah untuk di navigasi user dan mendorong user untuk menyelesaikan Habitsnya.
 - Menggunakan API untuk menambahkan fitur di web (Quotes yang berganti secara interval atau ketika ada permintaan dari user)
+- Menambahkan sebuah visualisasi produktivitas user menggunakan data times done dan total.
 
 
