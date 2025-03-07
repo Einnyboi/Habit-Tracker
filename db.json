@@ -1,0 +1,25 @@
+{
+  "habits": [
+    {
+      "id": "db5d",
+      "name": "find nemo",
+      "timesDone": 1,
+      "totalTimesDone": 1,
+      "lastDoneDate": "2025-03-07"
+    },
+    {
+      "id": "bc22",
+      "name": "reading my book everyday",
+      "timesDone": 0,
+      "totalTimesDone": 0,
+      "lastDoneDate": ""
+    },
+    {
+      "id": "a17c",
+      "name": "Drink Water",
+      "timesDone": 0,
+      "totalTimesDone": 0,
+      "lastDoneDate": ""
+    }
+  ]
+}

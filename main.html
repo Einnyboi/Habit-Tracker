@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Habit Tracker</title>
+    <link rel = "stylesheet" href = "style.css">
+
+</head>
+<body>
+    <div class="wave">
+    </div>
+    <div class = "super-center-grid">      
+        <h1 class = "judul">Simple Habit Tracker</h1>
+
+        <form class = "createnew" id="habitForm">
+            <h2 class = "createnewhabit">Create a New Habit!</h2>
+            <div class = "createnewbox">
+                <label class="createnewhabit" for="habitName">Habit Name:</label>
+                <input type="text" id="habitName" name="name" required>
+                <button class = "cute-button submit-button"type="submit">Add Habit</button>
+            </div>
+        </form>
+        <div class = "box">
+            <div class="habit-list" id="habitList">
+                <!-- Habits will be dynamically added here -->
+            </div>
+        </div>
+        <div class ="quotes">
+            <h4 class = "paragraph">"if you can get 1 percent better each day for one year, you'll end up thirty-seven times better by the time you're done"</h4>
+            <h5 class = "paragraph">-James Clear</h5>
+        </div>
+
+        <script>
+    
+    
+    // Function to fetch and display habits
+    const habitList = document.getElementById('habitList');
+    const habitForm = document.getElementById('habitForm');
+
+    // Function to get today's date as YYYY-MM-DD
+    function getTodayDate() {
+        const today = new Date();
+        return today.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
+    }
+
+    // Function to fetch and display habits
+    async function fetchHabits() {
+        const response = await fetch('http://localhost:3000/habits');
+        const habits = await response.json();
+        habitList.innerHTML = '';
+
+        habits.forEach(habit => {
+            const habitItem = document.createElement('div');
+            habitItem.className = `habit-item`;
+
+            habitItem.innerHTML = `
+        <span class="habit-name">${habit.name}</span> - 
+        <span class="habit-done">Done: ${habit.timesDone || 0} times</span> | 
+        <span class="habit-total">Total: ${habit.totalTimesDone || 0}</span>
+        <div class = "button-container">
+            <button class = "cute-button done-button" onclick="markDone('${habit.id}', '${habit.lastDoneDate || ''}')">Mark Done</button>
+            <button class = "cute-button delete-button" onclick="deleteHabit('${habit.id}')" style="color: red;">Delete</button>
+        </div>
+    `;
+
+
+            habitList.appendChild(habitItem);
+        });
+    }
+
+    // Function to add a new habit
+    habitForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const habitName = document.getElementById('habitName').value;
+
+        const response = await fetch('http://localhost:3000/habits', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                name: habitName, 
+                timesDone: 0, 
+                totalTimesDone: 0, 
+                lastDoneDate: '' 
+            }) // Added lastDoneDate & totalTimesDone
+        });
+
+        if (response.ok) {
+            fetchHabits();
+            document.getElementById('habitName').value = '';
+        }
+    });
+
+    // Function to mark a habit as done (limited to once per day)
+    async function markDone(id, lastDoneDate) {
+        const today = getTodayDate();
+        const habitResponse = await fetch(`http://localhost:3000/habits/${id}`);
+        const habit = await habitResponse.json();
+
+        if (habit.lastDoneDate === today) {
+            alert("You've already marked this habit as done today!");
+            return;
+        }
+
+        // Get current and last done month
+        const lastMonth = lastDoneDate ? new Date(lastDoneDate).getMonth() : null;
+        const currentMonth = new Date().getMonth();
+        const daysInMonth = new Date(new Date().getFullYear(), currentMonth + 1, 0).getDate();
+
+        // Reset timesDone if it's a new month
+        let newTimesDone = lastMonth !== currentMonth ? 1 : habit.timesDone + 1;
+
+        // If timesDone reaches the max days in the month, reset it to 0
+        if (newTimesDone > daysInMonth) newTimesDone = 0;
+
+        const newTotalTimesDone = habit.totalTimesDone + 1;
+
+        const response = await fetch(`http://localhost:3000/habits/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...habit,
+                timesDone: newTimesDone,
+                totalTimesDone: newTotalTimesDone,
+                lastDoneDate: today
+            })
+        });
+
+        if (response.ok) {
+            fetchHabits();
+        }
+    }
+
+
+    // Function to delete a habit
+    async function deleteHabit(id) {
+        const response = await fetch(`http://localhost:3000/habits/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            fetchHabits();
+        }
+    }
+
+    // Initial fetch of habits
+    fetchHabits();
+
+        </script>
+    </div>
+</body>
+</html>
