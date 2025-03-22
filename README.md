@@ -1,10 +1,5 @@
 # Habit-Tracker
 
-## Anggota
-Cathrine Sandrina 535240075
-Vanesa Yolanda 535240071
-Jessica Perez Chen 535240188
-
 ## Deskripsi
 Simple Habit Tracker adalah aplikasi web sederhana yang memungkinkan pengguna untuk mencatat dan melacak kebiasaan mereka. Pengguna dapat menambahkan kebiasaan baru, menandai kebiasaan yang telah dilakukan sebagai selesai, serta menghapus kebiasaan yang tidak diinginkan. Habits akan reset di bulan baru, dan habits bersifat daily, yaitu selesai sekali sehari.
 
