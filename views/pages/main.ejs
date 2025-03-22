@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Habit Tracker</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="super-center-grid">      
+        <div class="Header">
+            <h1 class="judul">Simple Habit Tracker</h1>
+        </div>
+        <div class="container">
+<form class="createnew-box" id="habitForm" action="/auth/habits" method="post">
+
+                <h2 class="create-new-prompt">Create a New Habit!</h2>
+                <div class="createnewbox">
+                    <label class="create-new-prompt" for="habitName">Habit Name:</label>
+                    <input type="text" id="habitName" name="name" required>
+                    <button class="cute-button submit-button" type="submit">Add Habit</button>
+                </div>
+            </form>
+            <div class="box">
+                <h2>Your Habits</h2>
+                <div class="habit-list" id="habitList">
+                    <!-- List for existing habits will be populated here -->
+                </div>
+            </div>
+        </div>
+        <div class="Footer">
+            <div class="quotes">
+                <h4 class="paragraph">"If you can get 1 percent better each day for one year, you'll end up thirty-seven times better by the time you're done."</h4>
+                <h5 class="paragraph">- James Clear</h5>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>
