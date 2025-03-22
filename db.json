@@ -1,6 +1,0 @@
-{
-  "habits": [
-    { "id": 1, "name": "Drink Water", "timesDone": 0 },
-    { "id": 2, "name": "Read 10 Pages", "timesDone": 0 }
-  ]
-}
