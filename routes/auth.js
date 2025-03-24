@@ -38,9 +38,14 @@ router.get('/logout', (req,res) =>{
 })
 
 router.get('/habits', async (req, res) => {
-    const habits = await habitList(); // Call the habitList function
-    console.log('Habits to render:', habits); // Log the habits before rendering
-    res.render('pages/main', { habits }); // Render the main page with habits
+    try {
+        const habits = await habitList(); // Call the habitList function
+        console.log('Habits to render:', habits); // Log the habits before rendering
+        res.render('pages/main', { habits }); // Render the main page with habits
+    } catch (error) {
+        console.error('Error fetching habits:', error); // Log any errors
+        res.status(500).render('pages/main', { error: 'Failed to fetch habits', habits: [] }); // Render with an error message
+    }
 });
 
 

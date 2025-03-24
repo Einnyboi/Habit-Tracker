@@ -24,7 +24,22 @@
             <div class="box">
                 <h2>Your Habits</h2>
                 <div class="habit-list" id="habitList">
-                    <!-- List for existing habits will be populated here -->
+                    <% if (habits && habits.length> 0) { %>
+                        <% habits.forEach(habit=> { %>
+                            <div class="habit-item">
+                                <span class="habit-name">
+                                    <%= habit.name %>
+                                </span>
+                                <span class="habit-status">
+                                    <%= habit.completed ? 'Completed' : 'Not Completed' %>
+                                </span>
+                                <button onclick="markDone('<%= habit._id %>')">Mark Done</button>
+                                <button onclick="deleteHabit('<%= habit._id %>')">Delete</button>
+                            </div>
+                            <% }) %>
+                                <% } else { %>
+                                    <p>No habits found.</p>
+                                    <% } %>
                 </div>
             </div>
         </div>
