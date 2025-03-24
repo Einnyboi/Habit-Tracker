@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
             habitItem.className = 'habit-item';
             habitItem.innerHTML = `
                 <span class="habit-name">${habit.name}</span>
-                <button onclick="markDone('${habit.id}')">Mark Done</button>
-                <button onclick="deleteHabit('${habit.id}')">Delete</button>
+                <span class="habit-status">${habit.completed ? 'Completed' : 'Not Completed'}</span>
+                <button onclick="markDone('${habit._id}')">Mark Done</button>
+                <button onclick="deleteHabit('${habit._id}')">Delete</button>
             `;
             habitList.appendChild(habitItem);
         });
