@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const habitList = document.getElementById('habitList');
 
     // Function to fetch and display habits
+    // Function to fetch and display habits
     async function fetchHabits() {
-        const response = await fetch('/auth/habits'); // Adjust the URL based on your routes
+        const response = await fetch('/habits/api/habits'); // << new JSON route
         const habits = await response.json();
         habitList.innerHTML = ''; // Clear the current list
 
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     // Function to add a new habit
     habitForm.addEventListener('submit', async (e) => {
         e.preventDefault(); // Prevent the default form submission
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Send a POST request to add the habit
-            const response = await fetch('/auth/habits', {
+            const response = await fetch('/habits', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -52,13 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to mark a habit as done
     window.markDone = async (id) => {
-        await fetch(`/auth/habits/${id}/done`, { method: 'POST' });
+        await fetch(`/habits/${id}/done`, { method: 'POST' });
         fetchHabits(); // Refresh the habit list
     };
 
     // Function to delete a habit
     window.deleteHabit = async (id) => {
-        await fetch(`/auth/habits/${id}`, { method: 'DELETE' });
+        await fetch(`/habits/${id}`, { method: 'DELETE' });
         fetchHabits(); // Refresh the habit list
     };
 

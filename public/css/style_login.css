@@ -1,0 +1,49 @@
+.super-center-grid{ 
+    /* agar tampilan berada di tengah*/
+    display:grid;
+    place-content:center;
+    min-height:100vh;
+   }
+
+
+.bg-secondary {
+    background: linear-gradient( #3F83C2, #DBAE31);
+}
+.card-body {
+    box-shadow: 0 15px 25px rgb(38, 44, 55);
+}
+
+.title {
+    text-align: center;
+    color: #333;
+    font-family: 'finlandica';
+    font-weight: bold; /*buat bold*/
+    font-size: 64;
+}
+.isi{
+    font-family: 'finlandica';
+    color: #746B6B;
+    font-size: 40;
+}
+.forgot{
+    font-size: 14px;
+    color: #746B6B;
+}
+.bottom p {
+    text-align: center;
+    font-size: 14px;
+}
+/*buat tombol login yang  hijau*/
+.btn-success {
+    width: 100%;
+    font-family: 'finlandica';
+    font-size: 22px !important; 
+}
+
+/* buat teks eror*/
+.text-danger{
+    font-size: 14px;
+    font-family: 'finlandica';
+    font-weight: bold; 
+    text-align: center;
+}
