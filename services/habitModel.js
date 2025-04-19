@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const connect = mongoose.connect("mongodb://localhost:27017/mydb"); // Connect to MongoDB database
+require('dotenv').config(); // Load environment variables from .env file
+const MONGO_URI = process.env.MONGO_URI; // MongoDB URI from environment variables
+const connect = mongoose.connect(MONGO_URI); // Connect to MongoDB database
 
 //to check if it successfully connected to the correct database
 connect.then(() => {
