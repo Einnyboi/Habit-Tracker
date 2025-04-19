@@ -2,10 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { loginUser, registration } = require('../services/sheet');
 
+//Routes only for login, logout and registration (authorization)
+//auth.js
+
 // GET login page
 router.get("/login", (req, res) => {
     if (req.session.user) {
-        res.redirect("/");
+        res.redirect("/habits");
     } else {
         res.render('pages/login');
     }
@@ -16,10 +19,13 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await loginUser(email, password);
-        req.session.user = user.name;
+        req.session.user = {
+            _id: user._id,
+            name: user.name
+        };        
         res.redirect("/habits");
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error.message }); 
     }
 });
 
@@ -46,7 +52,7 @@ router.post("/register", async (req, res) => {
 // GET logout
 router.get("/logout", (req, res) => {
     req.session.destroy();
-    res.redirect("/auth/login");
+    res.redirect("/");
 });
 
 module.exports = router;

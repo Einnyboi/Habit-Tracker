@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             habitItem.innerHTML = `
                 <span class="habit-name">${habit.name}</span>
                 <span class="habit-status">${habit.completed ? 'Completed' : 'Not Completed'}</span>
+                <span class="habit-category">Category: ${habit.category || 'Uncategorized'}</span>
                 <button onclick="markDone('${habit._id}')">Mark Done</button>
                 <button onclick="deleteHabit('${habit._id}')">Delete</button>
             `;
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     habitForm.addEventListener('submit', async (e) => {
         e.preventDefault(); // Prevent the default form submission
         const habitName = document.getElementById('habitName').value;
+        const habitCategory = document.getElementById('habitCategory').value;
 
         try {
             // Send a POST request to add the habit
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: habitName })
+                body: JSON.stringify({ name: habitName, category: habitCategory })
             });
 
             if (!response.ok) {

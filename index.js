@@ -32,6 +32,8 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+//mount paths to the router
 const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
 const habitRoutes = require('./routes/habits');

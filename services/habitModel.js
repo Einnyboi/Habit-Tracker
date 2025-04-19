@@ -11,7 +11,11 @@ connect.then(() => {
 
 const habitSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    completed: { type: Boolean, default: false }
+    completed: { type: Boolean, default: false },
+    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}, // Reference to the User model's ObjectId
+    category: String,
+    streak: { type: Number, default: 0 },
+    lastCompleted: Date
 });
 
 const Habit = mongoose.model('Habit', habitSchema);
