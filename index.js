@@ -4,10 +4,12 @@ const mongoose = require('mongoose'); // Import Mongoose
 const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
 const path = require('path'); 
 const app = express();
-const PORT = 3000;
+require('dotenv').config(); // Load environment variables from .env file
+const PORT = process.env.PORT || 3000; // Set the port number
+const mongoURI = process.env.MONGO_URI; // MongoDB URI from environment variables
 
 //mongoDB connection
-mongoose.connect('mongodb://localhost:27017/mydb', {
+mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
