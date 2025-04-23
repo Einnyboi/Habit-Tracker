@@ -12,13 +12,37 @@ connect.then(() => {
 });
 
 const habitSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    completed: { type: Boolean, default: false },
-    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}, // Reference to the User model's ObjectId
-    category: String,
-    streak: { type: Number, default: 0 },
-    lastCompleted: Date
-});
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    frequency: {
+      type: String,
+      enum: ['daily', 'weekly', 'monthly'],
+      required: true
+    },
+    target: {
+      type: Number,
+      default: 1,
+      min: 1
+    },
+    current: {
+      type: Number,
+      default: 0
+    },
+    lastCompleted: {
+      type: Date // optional, for tracking cooldowns
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  });
 
 const Habit = mongoose.model('Habit', habitSchema);
 

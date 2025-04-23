@@ -11,20 +11,31 @@ const habitList = async (userId) => {
         return habits;
 };
 
-const addHabit = async (name, userId, category) => {
-    const newHabit = new Habit({ name, userId, category});
+const addHabit = async (name, userId, frequency, target) => {
+    const newHabit = new Habit({ name, userId, frequency, target });
     await newHabit.save(); // Save the new habit to MongoDB
     return newHabit; //return the newly added habits
 };
 
 const markDone = async (id, userId) => {
-    const updatedHabit = await Habit.findOneAndUpdate(
-        { _id: id, userId },
-        { completed: true },
-        { new: true }
-    );
+    const habit = await Habit.findOne({ _id: id, userId });
     if (!habit) throw new Error("Habit not found or unauthorized");
-    return updatedHabit;
+
+    // Increment current count and update lastCompleted date
+    habit.current = (habit.current || 0) + 1;
+    habit.lastCompleted = new Date();
+
+    await habit.save();
+    return habit;
+};
+
+const resetHabit = async (id, userId) => {
+    const habit = await Habit.findOne({ _id: id, userId });
+    if (!habit) throw new Error("Habit not found or unauthorized");
+
+    habit.current = 0;
+    await habit.save();
+    return habit;
 };
 
 const deleteHabit = async (id, userId) => {
@@ -87,10 +98,10 @@ module.exports = {
     addHabit,
     markDone,
     deleteHabit,
+    resetHabit,
     validateUser,
     hashPassword,
     registerUser,
     registration,
     loginUser,
-    // Add other functions as needed
 };

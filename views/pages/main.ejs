@@ -3,60 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Habit Tracker</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file -->
+    <title>Consistify - Habit Tracker</title>
+    <link rel="stylesheet" href="/css/style_main.css">
 </head>
 <body>
-    <div class="super-center-grid">      
-        <!-- tambahin header atas, fungsinya bisa balik ke dashboard dkk -->
-        <div class="Header">
-            <h1 class="judul">Simple Habit Tracker</h1>
+    <div class="container">
+        <div class="header">
+            <h1 class="header-title">Consistify</h1>
+            <div class="user-icon">U</div>
         </div>
-        <div class="container">
-<form class="createnew-box" id="habitForm" action="/habits" method="post">
-
-                <h2 class="create-new-prompt">Create a New Habit!</h2>
-                <div class="createnewbox">
-                    <label class="create-new-prompt" for="habitName">Habit Name:</label>
-                    <input type="text" id="habitName" name="name" required>
-                    <input type="text" id="habitCategory" placeholder="Category (e.g. Morning)" />
-                    <button class="cute-button submit-button" type="submit">Add Habit</button>
+        
+        <div class="content">
+            <button class="add-habit-btn" id="show-add-form">
+                <span>+</span> Add New Habit
+            </button>
+            
+            <!-- Inline Add Habit Form -->
+            <div class="add-habit-form" id="add-habit-form">
+                <div class="form-group">
+                    <label for="habit-name">Habit Name</label>
+                    <input type="text" id="habit-name" placeholder="e.g. Drink water">
                 </div>
-            </form>
-            <div class="box">
-                <h2>Your Habits</h2>
-                <div class="habit-list" id="habitList">
-                    <% if (habits && habits.length> 0) { %>
-                        <% habits.forEach(habit=> { %>
-                            <div class="habit-item"> <!-- Each habits elements -->
-                                <span class="habit-name">
-                                    <%= habit.name %>
-                                </span>
-                                <span class="habit-status">
-                                    <!-- Display the completion status -->
-                                    <%= habit.completed ? 'Completed' : 'Not Completed' %>
-                                </span>
-                                <span class="habit-category">
-                                    Category: <%= habit.category || 'Uncategorized' %>
-                                </span>
-                                <button onclick="markDone('<%= habit._id %>')">Mark Done</button>
-                                <button onclick="deleteHabit('<%= habit._id %>')">Delete</button>
-                            </div>
-                            <% }) %>
-                                <% } else { %>
-                                    <p>No habits found.</p>
-                                    <% } %>
+                <div class="form-group">
+                    <label for="habit-frequency">Frequency</label>
+                    <select id="habit-frequency">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="habit-target">Target Count</label>
+                    <input type="number" id="habit-target" value="1" min="1">
+                </div>
+                <div class="form-actions">
+                    <button class="form-btn cancel-btn" id="cancel-add">Cancel</button>
+                    <button type="button" class="form-btn submit-btn" id="submit-habit">Add Habit</button>
                 </div>
             </div>
-        </div>
-        <div class="Footer">
-            <div class="quotes">
-                <h4 class="paragraph">"If you can get 1 percent better each day for one year, you'll end up thirty-seven times better by the time you're done."</h4>
-                <h5 class="paragraph">- James Clear</h5>
+
+            <!-- Habit List -->
+            <div id="habits-container">
+                <div class="empty-state">No habits yet. Add your first habit!</div>
             </div>
         </div>
     </div>
 
-    <script src="/js/script.js"></script> <!-- Link to your JavaScript file -->
+    <script src="/js/script.js"></script>
 </body>
 </html>
