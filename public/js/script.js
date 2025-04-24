@@ -131,4 +131,26 @@ async function fetchHabits() {
     } catch (err) {
         console.error('Failed to fetch habits:', err);
     }
+
+    const userIcon = document.querySelector('.user-icon');
+    const userModal = document.getElementById('userModal');
+    const closeUserModal = document.getElementById('closeUserModal');
+
+    // Show modal on user icon click
+    userIcon.addEventListener('click', () => {
+        userModal.style.display = 'block';
+    });
+
+    // Hide modal on close button click
+    closeUserModal.addEventListener('click', () => {
+        userModal.style.display = 'none';
+    });
+
+    // Hide modal when clicking outside modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === userModal) {
+            userModal.style.display = 'none';
+        }
+    });
+    
 }
